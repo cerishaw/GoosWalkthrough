@@ -46,11 +46,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationRunner.cs" />
     <Compile Include="AuctionEndToEnd.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AuctionEndToEnd.feature</DependentUpon>
     </Compile>
+    <Compile Include="AuctionEndToEndDefinitions.cs" />
+    <Compile Include="FakeAuctionServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
