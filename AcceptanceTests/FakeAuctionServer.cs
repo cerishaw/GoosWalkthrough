@@ -1,8 +1,8 @@
 using System.Collections.Concurrent;
-using Matrix;
-using Matrix.Xmpp;
-using Matrix.Xmpp.Client;
 using NUnit.Framework;
+using jabber;
+using jabber.client;
+using jabber.protocol.client;
 
 namespace AcceptanceTests
 {
@@ -14,29 +14,29 @@ namespace AcceptanceTests
         private const string AuctionPassword = "auction";
 
         private readonly string itemId;
-        private readonly XmppClient xmppClient;
+        private readonly JabberClient xmppClient;
         private readonly SingleMessageListener messageListener = new SingleMessageListener();
-        private Jid chatId;
+        private JID chatId;
 
         public FakeAuctionServer(string itemId)
         {
             this.itemId = itemId;
-            xmppClient = new XmppClient {XmppDomain = XmppHostName};
+            xmppClient = new JabberClient {Server = XmppHostName};
         }
 
         public void StartSellingItem()
         {
-            xmppClient.SetUsername(string.Format(ItemIdAsLogin, itemId));
+            xmppClient.User = string.Format(ItemIdAsLogin, itemId);
             xmppClient.Password = AuctionPassword;
-            xmppClient.SetResource(AuctionResource);
+            xmppClient.Resource = AuctionResource;
             xmppClient.OnMessage += xmppClient_OnMessage;
-            xmppClient.Open();
+            xmppClient.Connect();
         }
 
-        private void xmppClient_OnMessage(object sender, MessageEventArgs e)
+        private void xmppClient_OnMessage(object sender, Message msg)
         {
-            chatId = e.Message.From;
-            messageListener.ProcessMessage(e.Message);
+            chatId = msg.From;
+            messageListener.ProcessMessage(msg);
         }
 
         public void HasReceivedJoinRequestFromSniper()
@@ -46,7 +46,7 @@ namespace AcceptanceTests
 
         public void AnnounceClose()
         {
-            xmppClient.Send(new Message(chatId, MessageType.chat, ""));
+            xmppClient.Message(MessageType.chat, chatId.User, "close");
         }
 
         public void Stop()

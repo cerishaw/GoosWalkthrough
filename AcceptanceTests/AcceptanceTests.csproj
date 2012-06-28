@@ -31,8 +31,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Matrix">
-      <HintPath>..\libs\Matrix.dll</HintPath>
+    <Reference Include="Bricks">
+      <HintPath>..\libs\Bricks.dll</HintPath>
+    </Reference>
+    <Reference Include="Bricks.RuntimeFramework">
+      <HintPath>..\libs\Bricks.RuntimeFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\libs\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\libs\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="jabber-net">
+      <HintPath>..\libs\jabber-net.dll</HintPath>
+    </Reference>
+    <Reference Include="netlib.Dns">
+      <HintPath>..\libs\netlib.Dns.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
@@ -49,6 +64,9 @@
     <Reference Include="TechTalk.SpecFlow">
       <HintPath>..\packages\SpecFlow.1.8.1\lib\net35\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
+    <Reference Include="White.Core">
+      <HintPath>..\libs\White.Core.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +77,7 @@
       <DependentUpon>AuctionEndToEnd.feature</DependentUpon>
     </Compile>
     <Compile Include="AuctionEndToEndDefinitions.cs" />
+    <Compile Include="AuctionSniperDriver.cs" />
     <Compile Include="FakeAuctionServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
